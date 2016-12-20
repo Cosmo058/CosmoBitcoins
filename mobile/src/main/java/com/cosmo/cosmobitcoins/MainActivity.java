@@ -1,14 +1,14 @@
 package com.cosmo.cosmobitcoins;
 
 import android.os.StrictMode;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import org.json.JSONObject;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     private static String TAG = "CosmoBitcoins";
 
     double btc_available = 0;
@@ -26,11 +26,10 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); //TODO DEGUB imlementar las operaciones de red en un hilo separado del main
-        StrictMode.setThreadPolicy(policy); //TODO DEGUB imlementar las operaciones de red en un hilo separado del main
+        StrictMode.setThreadPolicy(policy);                                                         //TODO DEGUB imlementar las operaciones de red en un hilo separado del main
 
         HttpBitso http = new HttpBitso();
 
-        //System.out.println("Testing 1 - Send Http GET request");
         try {
             JSONObject j = http.sendGet();
             Log.d(TAG, "Last BTC price: " + j.getString("last"));
@@ -62,6 +61,12 @@ public class MainActivity extends ActionBarActivity {
 
         Log.d(TAG,"BTC if buy: " +btc_to_earn);
         Log.d(TAG,"MXN if sell: "+mxn_to_earn);
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
 
     }
 

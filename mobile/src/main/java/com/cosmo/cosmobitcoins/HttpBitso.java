@@ -1,8 +1,6 @@
 package com.cosmo.cosmobitcoins;
 
-/**
- * Created by Angel on 18/07/2015.
- */
+// Created by Angel on 18/07/2015.
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
@@ -31,9 +29,9 @@ public class HttpBitso {
         //add request header
         con.setRequestProperty("User-Agent",USER_AGENT);
 
-        /*int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'GET' request to URL : " + url);
-        System.out.println("Response Code : " + responseCode);*/
+        //int responseCode = con.getResponseCode();
+        //System.out.println("\nSending 'GET' request to URL : " + url);
+        //System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -47,10 +45,7 @@ public class HttpBitso {
         //print result
         //System.out.println(response.toString());
 
-        JSONObject jsonObj = new JSONObject(response.toString());
-
-        return jsonObj;
-
+        return new JSONObject(response.toString());
     }
 
 
@@ -106,8 +101,6 @@ public class HttpBitso {
         //print result
         //System.out.println(response.toString());
 
-        JSONObject jsonObj = new JSONObject(response.toString());
-
-        return jsonObj;
+        return new JSONObject(response.toString());
     }
 }
