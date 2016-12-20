@@ -9,6 +9,9 @@
     <string name="bid">Bid:</string>
     <string name="bid_ask_difference">Bid-Ask:</string>
     <string name="btc_available">BTC available:</string>
+    <string name="mxn_available">MXN available:</string>
     <string name="btc_if_buy">BTC if buy:</string>
     <string name="mxn_if_sell">MXN if sell:</string>
+    <string name="default_quantity">0</string>
+    <string name="last_update">Last updated:</string>
 </resources>

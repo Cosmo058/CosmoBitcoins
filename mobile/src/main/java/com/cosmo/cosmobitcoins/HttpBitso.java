@@ -43,7 +43,7 @@ public class HttpBitso {
         in.close();
 
         //print result
-        //System.out.println(response.toString());
+        System.out.println(response.toString());
 
         return new JSONObject(response.toString());
     }

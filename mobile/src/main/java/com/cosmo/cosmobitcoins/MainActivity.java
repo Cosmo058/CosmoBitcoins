@@ -6,7 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
 import org.json.JSONObject;
+
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private static String TAG = "CosmoBitcoins";
@@ -19,11 +26,25 @@ public class MainActivity extends AppCompatActivity {
     double fee =0 ;
     double ask = 0;
     double bid = 0;
+    long timestamp = 0;
+
+    TextView tv10,tv11,tv12,tv13,tv14,tv15,tv16,tv17,tv19;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        tv10 = (TextView)findViewById(R.id.textView10);
+        tv11 = (TextView)findViewById(R.id.textView11);
+        tv12 = (TextView)findViewById(R.id.textView12);
+        tv13 = (TextView)findViewById(R.id.textView13);
+        tv14 = (TextView)findViewById(R.id.textView14);
+        tv15 = (TextView)findViewById(R.id.textView15);
+        tv16 = (TextView)findViewById(R.id.textView16);
+        tv17 = (TextView)findViewById(R.id.textView17);
+        tv17 = (TextView)findViewById(R.id.textView17);
+        tv19 = (TextView)findViewById(R.id.textView19);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); //TODO DEGUB imlementar las operaciones de red en un hilo separado del main
         StrictMode.setThreadPolicy(policy);                                                         //TODO DEGUB imlementar las operaciones de red en un hilo separado del main
@@ -35,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "Last BTC price: " + j.getString("last"));
             Log.d(TAG,"Ask (precio de compra): " + j.getString("ask"));
             Log.d(TAG,"Bid (precio de venta) : " + j.getString("bid"));
+            timestamp = Long.parseLong(j.getString("timestamp"));
             last_btc_price = Double.parseDouble(j.getString("last"));
             ask = Double.parseDouble(j.getString("ask"));
             bid = Double.parseDouble(j.getString("bid"));
@@ -67,6 +89,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+
+        tv10.setText(Double.toString(last_btc_price));
+        tv11.setText(Double.toString(ask));
+        tv12.setText(Double.toString(bid));
+        tv13.setText(String.format("%.3f", bid - ask));
+        tv14.setText(Double.toString(btc_available)+" BTC");
+        tv15.setText(Double.toString(mxn_available)+" MXN");
+        tv16.setText(Double.toString(mxn_to_earn));
+        tv17.setText(Double.toString(btc_to_earn));
+        tv19.setText(new SimpleDateFormat("d MMM yyyy 'at' hh:mm:ss a").format(new Date(timestamp*1000)));
 
     }
 
