@@ -30,8 +30,9 @@ public class MainActivity extends AppCompatActivity {
     long timestamp = 0;
     double invested_money = 7178.34;
     double earnings = 0;
+    double change = 0;
 
-    TextView tv10,tv11,tv12,tv13,tv14,tv15,tv16,tv17,tv19,tv22,tv23;
+    TextView tv10,tv11,tv12,tv13,tv14,tv15,tv16,tv17,tv19,tv22,tv23,tv25;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         tv19 = (TextView)findViewById(R.id.textView19);
         tv22 = (TextView)findViewById(R.id.textView22);
         tv23 = (TextView)findViewById(R.id.textView23);
+        tv25 = (TextView)findViewById(R.id.textView25);
 
         swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -132,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
         mxn_to_earn = btc_available*bid*(1L-(fee/100L));
 
         earnings = mxn_to_earn - invested_money;
+        change = ((mxn_to_earn/invested_money)*100)-100;
 
         Log.d(TAG,"BTC if buy: " +btc_to_earn);
         Log.d(TAG,"MXN if sell: "+mxn_to_earn);
@@ -149,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         tv19.setText(new SimpleDateFormat("d MMM yyyy 'at' hh:mm:ss a").format(new Date(timestamp*1000)));
         tv22.setText(Double.toString(invested_money) + " MXN");
         tv23.setText(String.format("%.2f",earnings) + " MXN");
+        tv25.setText(String.format("%.3f",change)+ " %");
 
         if(earnings>=0){
             tv23.setTextColor(Color.parseColor("#00ff00"));
