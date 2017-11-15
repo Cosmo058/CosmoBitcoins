@@ -3,7 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title"><b><i>Account balance</i></b></string>
+    <string name="title">Account balance</string>
     <string name="last_btc_price">Last BTC price:</string>
     <string name="ask">Ask:</string>
     <string name="bid">Bid:</string>

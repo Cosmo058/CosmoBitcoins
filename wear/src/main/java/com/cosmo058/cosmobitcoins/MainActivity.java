@@ -1,4 +1,4 @@
-package com.cosmo.cosmobitcoins;
+package com.cosmo058.cosmobitcoins;
 
 import android.app.Activity;
 import android.os.Bundle;

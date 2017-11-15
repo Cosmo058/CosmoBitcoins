@@ -1,4 +1,4 @@
-package com.cosmo.cosmobitcoins;
+package com.cosmo058.cosmobitcoins;
 
 /**
  * Created by Angel on 18/07/2015.

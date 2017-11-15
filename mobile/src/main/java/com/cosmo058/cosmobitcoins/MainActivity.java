@@ -1,4 +1,4 @@
-package com.cosmo.cosmobitcoins;
+package com.cosmo058.cosmobitcoins;
 
 import android.graphics.Color;
 import android.os.StrictMode;
@@ -15,20 +15,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private static String TAG = "CosmoBitcoins";
     private SwipeRefreshLayout swipeContainer;
-
 
     double btc_available = 0;
     double mxn_available = 0;
     double last_btc_price = 0;
     double mxn_to_earn = 0;
     double btc_to_earn = 0;
-    double fee =0 ;
+    double fee = 0 ;
     double ask = 0;
     double bid = 0;
     long timestamp = 0;
-    double invested_money = 7178.34;
+    double invested_money = 5000;
     double earnings = 0;
     double change = 0;
 
@@ -39,33 +37,33 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv10 = (TextView)findViewById(R.id.textView10);
-        tv11 = (TextView)findViewById(R.id.textView11);
-        tv12 = (TextView)findViewById(R.id.textView12);
-        tv13 = (TextView)findViewById(R.id.textView13);
-        tv14 = (TextView)findViewById(R.id.textView14);
-        tv15 = (TextView)findViewById(R.id.textView15);
-        tv16 = (TextView)findViewById(R.id.textView16);
-        tv17 = (TextView)findViewById(R.id.textView17);
-        tv17 = (TextView)findViewById(R.id.textView17);
-        tv19 = (TextView)findViewById(R.id.textView19);
-        tv22 = (TextView)findViewById(R.id.textView22);
-        tv23 = (TextView)findViewById(R.id.textView23);
-        tv25 = (TextView)findViewById(R.id.textView25);
+        tv10 = findViewById(R.id.textView10);
+        tv11 = findViewById(R.id.textView11);
+        tv12 = findViewById(R.id.textView12);
+        tv13 = findViewById(R.id.textView13);
+        tv14 = findViewById(R.id.textView14);
+        tv15 = findViewById(R.id.textView15);
+        tv16 = findViewById(R.id.textView16);
+        tv17 = findViewById(R.id.textView17);
+        tv17 = findViewById(R.id.textView17);
+        tv19 = findViewById(R.id.textView19);
+        tv22 = findViewById(R.id.textView22);
+        tv23 = findViewById(R.id.textView23);
+        tv25 = findViewById(R.id.textView25);
 
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer = findViewById(R.id.swipeContainer);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 // Your code to refresh the list here.
-                // Make sure you call swipeContainer.setRefreshing(false)
-                // once the network request has completed successfully.
+                // Make sure you call swipeContainer.setRefreshing(false) once the network request has completed successfully.
                 System.out.println("Refreshed");
                 getBalance();
                 setBalance();
             }
         });
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+        swipeContainer.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
@@ -108,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
     public void getBalance(){
         HttpBitso http = new HttpBitso();
 
+        String TAG = "CosmoBitcoins";
         try {
             JSONObject j = http.sendGet();
             Log.d(TAG, "Last BTC price: " + j.getString("last"));
@@ -155,11 +154,11 @@ public class MainActivity extends AppCompatActivity {
         tv25.setText(String.format("%.3f",change)+ " %");
 
         if(earnings>=0){
-            tv23.setTextColor(Color.parseColor("#00ff00"));
+            tv23.setTextColor(Color.parseColor("#009933"));
         }else{
             tv23.setTextColor(Color.parseColor("#ff0000"));
         }
 
-        swipeContainer.setRefreshing(false); //Moverlo a un lugar mejor
+        swipeContainer.setRefreshing(false); //TODO Moverlo a un lugar mejor
     }
 }
