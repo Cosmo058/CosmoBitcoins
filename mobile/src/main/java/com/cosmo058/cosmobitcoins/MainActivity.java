@@ -1,5 +1,9 @@
 package com.cosmo058.cosmobitcoins;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.StrictMode;
 import android.os.Bundle;
@@ -8,7 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONObject;
 import java.text.SimpleDateFormat;
@@ -16,6 +22,7 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeContainer;
+    SharedPreferences sharedPref = null;
 
     double btc_available = 0;
     double mxn_available = 0;
@@ -26,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     double ask = 0;
     double bid = 0;
     long timestamp = 0;
-    double invested_money = 5000;
+    double invested_money = 0;
     double earnings = 0;
     double change = 0;
 
@@ -62,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 setBalance();
             }
         });
+
         swipeContainer.setColorSchemeResources(
                 android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -71,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build(); //TODO DEGUB imlementar las operaciones de red en un hilo separado del main
         StrictMode.setThreadPolicy(policy);                                                         //TODO DEGUB imlementar las operaciones de red en un hilo separado del main
+
+        sharedPref = MainActivity.this.getPreferences(Context.MODE_PRIVATE);
+        invested_money = sharedPref.getFloat(getString(R.string.invested_amount_stored),0);
 
         getBalance();
     }
@@ -83,20 +94,42 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_new_amount) {
+            Toast.makeText(getApplicationContext(), "Settings selected", Toast.LENGTH_SHORT).show();
+            final EditText input = new EditText(this);
+
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_popup_sync)
+                    .setTitle("New amount")
+                    .setMessage("Input new invested amount")
+                    .setView(input)
+                    .setPositiveButton("Set value", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putFloat(getString(R.string.invested_amount_stored),Float.parseFloat(input.getText().toString()));
+                            editor.apply();
+                            invested_money = Float.parseFloat(input.getText().toString());
+                            getBalance();
+                            setBalance();
+                        }
+                    })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+
+            return true;
+        }if (id == R.id.action_refresh) {
+            getBalance();
+            setBalance();
+            Toast.makeText(getApplicationContext(), "Refreshed", Toast.LENGTH_SHORT).show();
             return true;
         }
 
