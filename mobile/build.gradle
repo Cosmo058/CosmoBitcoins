@@ -19,8 +19,15 @@ android {
     }
 }
 
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:27.0.1'
     compile 'com.android.support:support-v4:27.0.1'
+    compile 'com.github.bitsoex:bitso-java:v3.0.5'
 }
