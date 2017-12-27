@@ -1,8 +1,7 @@
 package com.cosmo058.cosmobitcoins;
 
-/**
- * Created by Angel on 18/07/2015.
- */
+/* Created by Angel on 18/07/2015. */
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;

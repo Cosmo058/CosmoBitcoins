@@ -10,11 +10,11 @@ import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 import org.json.JSONObject;
 
-public class HttpBitso {
+public class BitsoV2 {
     private final String USER_AGENT = "Bitso API from Java";
-    private final int client = 21328;
-    private final String key ="nrIJgvSMlA";
-    private final String secret = "ca0e6ff47644eebed43f9863a56ecb79";
+    private final int client = Integer.parseInt( System.getenv("BITSO_CLIENT"));
+    private final String key = System.getenv("BITSO_API_KEY");
+    private final String secret = System.getenv("BITSO_SECRET");
 
     // HTTP GET request
     public JSONObject sendGet() throws Exception {
@@ -28,10 +28,6 @@ public class HttpBitso {
 
         //add request header
         con.setRequestProperty("User-Agent",USER_AGENT);
-
-        //int responseCode = con.getResponseCode();
-        //System.out.println("\nSending 'GET' request to URL : " + url);
-        //System.out.println("Response Code : " + responseCode);
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -84,11 +80,6 @@ public class HttpBitso {
         wr.flush();
         wr.close();
 
-        /*int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);*/
-
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuilder response = new StringBuilder();
@@ -97,9 +88,6 @@ public class HttpBitso {
             response.append(inputLine);
         }
         in.close();
-
-        //print result
-        //System.out.println(response.toString());
 
         return new JSONObject(response.toString());
     }

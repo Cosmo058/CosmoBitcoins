@@ -7,9 +7,9 @@ android {
     defaultConfig {
         applicationId "com.cosmo058.cosmobitcoins"
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 24
         versionCode 1
-        versionName "1.0"
+        versionName "v0.2.0-beta"
     }
     buildTypes {
         release {

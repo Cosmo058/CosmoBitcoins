@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getBalance(){
-        HttpBitso http = new HttpBitso();
+        BitsoV2 http = new BitsoV2();
 
         String TAG = "CosmoBitcoins";
         try {
