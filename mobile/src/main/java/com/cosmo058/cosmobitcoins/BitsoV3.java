@@ -13,12 +13,9 @@ import org.json.JSONObject;
 
 public class BitsoV3 {
     private final String USER_AGENT = "Bitso API from Java";
-    //private final int client = 976440;
-    //private final String key ="NCswiFNIsl";
-    //private final String secret = "5ae152191ea628060ba6062e8e9732b7";
-    private final int client = 21328;
-    private final String key ="nrIJgvSMlA";
-    private final String secret = "ca0e6ff47644eebed43f9863a56ecb79";
+    private final int client = Integer.parseInt( System.getenv("BITSO_CLIENT"));
+    private final String key = System.getenv("BITSO_API_KEY");
+    private final String secret = System.getenv("BITSO_SECRET");
 
     // HTTP GET request
     public JSONObject sendGet() throws Exception {
@@ -63,7 +60,7 @@ public class BitsoV3 {
         J_obj.put("signature",signature);
 
         if(!action.equals(""))
-            url = "https://api.bitso.com/v2/" + action;
+            url = "https://api.bitso.com/v3/" + action;
 
         URL obj = new URL(url);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();

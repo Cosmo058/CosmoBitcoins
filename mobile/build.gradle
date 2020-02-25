@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.1'
+    buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.cosmo058.cosmobitcoins"
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 27
         versionCode 1
         versionName "v0.2.0-beta"
     }
@@ -16,6 +16,10 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
     }
 }
 
@@ -26,8 +30,8 @@ allprojects {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:27.0.1'
-    compile 'com.android.support:support-v4:27.0.1'
-    compile 'com.github.bitsoex:bitso-java:v3.0.5'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.github.bitsoex:bitso-java:v3.0.5'
 }

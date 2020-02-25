@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     double ask = 0;
     double bid = 0;
     long timestamp = 0;
-    double invested_money = 0;
+    double invested_money = 527;
     double earnings = 0;
     double change = 0;
 
@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void getBalance(){
         BitsoV2 http = new BitsoV2();
+        BitsoV3 http3 = new BitsoV3();
 
         String TAG = "CosmoBitcoins";
         try {
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
             bid = Double.parseDouble(j.getString("bid"));
             Log.d(TAG,"Bid-Ask: "+Double.toString(bid-ask));
 
-            j = http.sendPost("balance");
+            j = http3.sendPost("balance/");
             Log.d(TAG,"BTC available: "+j.getString("btc_available"));
 
             btc_available = Double.parseDouble(j.getString("btc_available"));
